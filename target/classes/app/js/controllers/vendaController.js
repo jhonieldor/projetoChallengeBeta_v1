@@ -3,28 +3,16 @@ app.controller('VendaCtrl',  ['$q', '$scope', '$mdDialog', '$timeout', function(
     $scope.INSERT_STATE = "vendas.criar";
     $scope.UPDATE_STATE = "vendas.editar";
     
-    $selected = [];
+    $scope.selected = [];
     $scope.query = {
         order: 'name',
         limit: 5,
         page:1
     }
     
-    $scope.vendas = [
-        {
-            "cliente": "Bobby",
-            "dataVenda": "23/11/2015", 
-            "total": "R$ 2.100,00"
-        },
-        
-        {
-            "cliente": "Gesmiro",
-            "dataVenda": "22/11/2015", 
-            "total": "R$ 2.1500,00"
-        }
- 
-       
-    ];
+    $scope.vendas = [];
+    
+    
     
     $scope.onopenchange = function(page, limit){
         var deferred = $q.defer();

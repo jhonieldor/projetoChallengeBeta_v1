@@ -1,9 +1,7 @@
-app.controller('ProdutoCtrl',  ['$q', '$scope', '$rootScope', '$mdToast', '$log', '$injector', '$importService', '$mdDialog', '$timeout', function($q, $scope, $rootScope, $mdToast, $log, $injector, $importService, $mdDialog, $timeout) {
+app.controller('ProdutoCtrl',  ['$q', '$scope', '$rootScope', '$mdToast', '$log', '$injector', '$importService', '$mdDialog', '$timeout', function ($q, $scope, $rootScope, $mdToast, $log, $injector, $importService, $mdDialog, $timeout) {
     'use strict';
     $importService("produtoService");
-    
-   
-    
+        
     $scope.selected = [];
     $scope.query = {
         order: 'name',
@@ -100,7 +98,7 @@ app.controller('ProdutoCtrl',  ['$q', '$scope', '$rootScope', '$mdToast', '$log'
                 .action('Fechar')
                 .highlightAction(false)
                 .position('bottom left right');
-                $mdTooast.show(toast).then(function(){
+                $mdToast.show(toast).then(function(){
                     
                 });
             

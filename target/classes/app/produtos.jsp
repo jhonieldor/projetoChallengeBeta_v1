@@ -19,8 +19,12 @@
                 </md-data-table-toolbar>
 
 
-                <md-data-table-toolbar class="alternate" ng-show="selected.length">
+                <md-data-table-toolbar class="alternate" ng-show="selected.length" layout="row" layout-align="space-between center" style="padding-left: 95px;" width="100%" height="78">
                     <div>{{selected.length}} {{selected.length > 1 ? 'produtos selecionados' : 'produto selecionado'}}</div>
+                    
+                    <md-button class="md-icon-button md-raised" aria-label="Excluir" ng-click="dialogExcluirProduto($event, produtosExcluir)">
+                <i class="md-icon-delete md-icon-lg"></i>
+            </md-button>
                 </md-data-table-toolbar>
 
                  <md-data-table-container>
@@ -33,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="produto in produtos| orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                            <tr ng-repeat="produto in produtos | orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                         query.limit" ng-click="produtoClicked($event, produto)">
 
                                 <td>{{produto.descricao}}</td>
