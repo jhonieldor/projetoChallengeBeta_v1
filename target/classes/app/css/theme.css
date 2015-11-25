@@ -1,0 +1,284 @@
+body {
+    font-size: 13px;
+}
+
+.md-toolbar-nav-top {
+    font-size: 16px;
+    min-height: 20px;
+    height: 54px;
+    padding: 0 20px;
+}
+
+.eits-header-title .md-toolbar-tools, h2.eits-header-title span {
+    font-size: 26px;
+    margin-left: 80px;
+    min-width: 350px;
+}
+
+md-toolbar.eits-menu-header {
+    z-index: inherit;
+    min-height: 60px;
+    max-height: 60px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.md-toolbar-main {
+    min-height: 20px !important;
+    height: 78px !important;
+    /*background-color: #004ea1!important;*/
+    padding-top: 7px !important;
+}
+
+.grid-header {
+    border-bottom: 1px solid lightgray;
+    height: 77px;
+}
+
+.grid-column-header {
+    height: 100%;
+    float: left;
+    padding-top: 33px;
+    color: #6c6c6c;
+    cursor: pointer;
+}
+
+md-data-table-toolbar.alternate {
+    color: #1e88e5;
+    background-color: #e3f2fd;
+}
+
+.page-title {
+    margin-left: 79px;
+}
+
+.page-title i {
+    margin: 0 15px;
+}
+
+.grid-add-button {
+    position: absolute;
+    top: 42px;
+    left: 35px;
+}
+
+.low-add-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+.limpar-selecao {
+    text-decoration: underline;
+    color: #9292ad;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.observacao-select {
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    line-height: 24px;
+    margin-top: 2px;
+}
+
+.input-error-message {
+    order: 3;
+    font-size: 12px;
+    line-height: 24px;
+    color: #F44336;
+    height: 0px;
+}
+
+.eits-paper-sheet-item.clicked {
+    padding-bottom: 0;
+}
+
+eits-paper-sheet[disabled] .eits-paper-sheet-item {
+    opacity: 0.5;
+}
+
+.secoes-list {
+    background: #FFFFFF
+}
+
+.secoes-list .selected button {
+    color: #6471C0;
+    background-color: #E8EAF6;
+}
+
+.secoes-list md-list-item {
+    height: 60px;
+}
+
+.secoes-options {
+    background: #3949AB;
+    color: white;
+    font-size: 25px;
+    min-height: 60px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 330px;
+}
+
+.plano-diretor-descricao {
+    font-size: 15px;
+}
+
+.plano-diretor-versao {
+    font-size: 14px;
+    color: gray;
+}
+
+.plano-diretor-status {
+    font-size: 14px;
+}
+
+.pdti-filters {
+    margin-top: 50px;
+}
+
+.pdti-filters > md-list-item.selected {
+    background-color: #F6F6F6;
+}
+
+.pdti-filters > md-list-item .md-list-item-inner {
+    padding-left: 24px;
+}
+
+.pdti-filters > md-list-item .background-span {
+    height: 100%;
+    width: 5px;
+    left: 0px;
+    position: absolute;
+}
+
+.pdti-filters > md-list-item.selected .background-span {
+    background-color: blue;
+}
+
+.ta-text.text-editor {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.float-left-element {
+    float: left;
+}
+
+.inline-block-element {
+    display: inline-block;
+}
+
+.necessidade-detail-field label {
+    font-size: 13px;
+    color: darkgray;
+}
+
+.necessidade-detail-field span {
+
+}
+
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #333333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+md-toast {
+    position: fixed;
+}
+
+table[md-data-table] > tbody > tr[disabled] > td {
+    color: #D7D7D7;
+}
+
+.hide-checkbox table[md-data-table] > thead > tr > th:first-child > md-checkbox {
+    display: none;
+}
+
+.hide-checkbox table[md-data-table] > thead > tr > th:first-child {
+    width: 47px !important;
+}
+
+.linha_registro_nao_encontrado {
+    border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+    border-top: 1px rgba(0, 0, 0, 0.12) solid;
+    margin: auto;
+    padding: 15px 23px;
+    height: 17px;
+}
+
+.custom-grid-footer {
+    background-color: white;
+    bottom: 0;
+    position: fixed;
+    right: 0;
+    border-top: 1px rgba(0, 0, 0, 0.12) solid;
+    height: 60px;
+    width: 100%;
+}
+
+/* Componentes RC3 */
+body md-dialog-container:last-child {
+    position: fixed
+}
+
+md-dialog {
+    max-height: 100%;
+    overflow: hidden;
+}
+
+md-dialog md-dialog-content {
+    padding: 30px;
+}
+
+.froala-box, .froalaEditor {
+    width: 100%;
+}
+
+.html-showbox {
+    width: 97%;
+    min-height: 150px;
+    padding: 13px;
+}
+
+md-sidenav.eits-menu-header-width {
+    min-width: 359px;
+    max-width: 359px;
+    overflow: hidden;
+}
+
+.eits-left-vpadding md-list-item .md-no-style.md-button, md-list-item.md-no-proxy.md-button {
+    padding-left: 40px;
+    height: 60px;
+}
+
+.eits-publish-button {
+    margin-top: 0px;
+    position: fixed;
+    top: 13px;
+    z-index: 1;
+    left: 255px;
+}
+
+.popup-plano-diretor {
+    height: 530px;
+    width: 700px;
+    padding: 0;
+}
+
+.list-empty-grid {
+    background-color: #F2F2F2;
+    font-size: 14px;
+    color: #9E9E9E;
+}
