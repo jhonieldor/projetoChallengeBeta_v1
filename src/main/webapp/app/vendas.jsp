@@ -9,14 +9,8 @@
     
 <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button href="#/lancamento_vendas" ng-click="lancarVendas()">Lançar Venda</md-button>
-            
-            <!--<md-button class="md-fab md-accent md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopup($event)">
-                <i class="md-icon md-icon-add md-icon-lg"></i>
-            </md-button>-->
-            
-            
-            
+            <md-button ng-click="lancarVendas()">Lançar Venda</md-button>
+          
         </section>
 
 </div>    
@@ -60,6 +54,8 @@
         <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{produtos.count}}" md-trigger="onpagechange"></md-data-table-pagination>
         
     </md-card>
+    
+    
     
         
 </md-content>

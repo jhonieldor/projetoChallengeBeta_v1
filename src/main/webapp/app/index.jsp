@@ -33,8 +33,8 @@
             Controle de Vendas
         </div>
     </md-toolbar>
-    <div layout="row" flex ng-show="{{mainMenu}}">
-        <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2"
+    <div layout="row" flex>
+        <md-sidenav ng-if="$root.mainMenu"  layout="column" class="md-sidenav-left md-whiteframe-z2"
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <div>
                 <md-content layout="column"> 
@@ -89,7 +89,7 @@
     <script src="./app/js/controllers/produtoController.js"></script>
     <script src="./app/js/controllers/usuarioController.js"></script>    
     <script src="./app/js/controllers/vendaController.js"></script>
-    
+    <script src="./app/js/controllers/lancamentoVendaController.js"></script>    
 
 
 </body>

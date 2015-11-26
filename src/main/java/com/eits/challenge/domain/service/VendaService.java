@@ -73,6 +73,10 @@ public class VendaService {
 	}
 	
 	
+        public  List<Cliente> buscarClientes(){
+            return clienteRepository.findAll();
+        }
+        
 	public void salvarVenda(Venda venda){
 		vendaRepository.save(venda);
 	}

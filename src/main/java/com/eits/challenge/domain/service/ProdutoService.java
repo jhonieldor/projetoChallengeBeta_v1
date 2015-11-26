@@ -23,7 +23,7 @@ public class ProdutoService {
 	}
 	
 	public void remover(List<Produto> produtos){
-		produtoRepository.deleteInBatch(produtos);
+		produtoRepository.delete(produtos);
 	}
 	
 	public List<Produto> listarProdutos(){

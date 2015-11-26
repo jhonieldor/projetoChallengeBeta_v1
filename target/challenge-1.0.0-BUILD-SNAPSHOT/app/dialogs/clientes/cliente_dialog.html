@@ -1,0 +1,68 @@
+<md-dialog aria-label="Cliente">
+    <div layout="column" ng-cloak>
+    <md-card>
+        <center>
+            <h2> Cliente</h2>
+        </center>
+    <md-dialog-content layout-padding style="width: 300px">
+        
+        <form name="clienteForm" novalidate="true" >
+           <!-- <input name="Nome" -->
+          <div layout layout-sm="column">  
+            <md-input-container style="width: 100%;">  
+                <label> Nome </label>
+                    <input type="text"  ng-model="entidade.nome" name="nome" required maxlength=200>
+                        <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="clienteForm.nome.$error">
+                            <div ng-message="required">
+                                Campo obrigatório.
+                            </div>
+                        </div>
+            </md-input-container>
+          </div>
+    
+            
+          <div layout layout-sm="column">  
+            <md-input-container style="width: 100%;">  
+                <label> Cidade </label>
+                    <input type="text" ng-model="entidade.cidade" name="cidade" required maxlength=200>
+                        <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="clienteForm.cidade.$error">
+                            <div ng-message="required">
+                                Campo obrigatório.
+                            </div>
+                        </div>
+            </md-input-container>
+          </div>        
+        
+        <div layout layout-sm="column">  
+            <md-input-container style="width: 100%;">  
+                <label> UF </label>
+                    <input type="text" ng-model="entidade.uf" name="uf" required maxlength=200>
+                        <div ng-show="frm.$submitted || frm.uf.$touched" ng-messages="clienteForm.uf.$error">
+                            <div ng-message="required">
+                                Campo obrigatório.
+                            </div>
+                        </div>
+            </md-input-container>
+          </div>          
+              
+           
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancelar()">
+                    Cancelar
+                </md-button>
+                <md-button ng-click="salvar()"  class="md-primary">
+                    Salvar
+                </md-button>
+                
+               
+            </div>      
+        
+            
+        </form>
+        
+    
+    </md-dialog-content>
+    </md-card>   
+    </div>    
+
+</md-dialog>

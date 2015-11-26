@@ -1,91 +1,91 @@
 <md-dialog aria-label="Produto">
     <div layout="column" ng-cloak>
-    <md-card>
-        <center>
-            <h2> Produto </h2>
-        </center>
-    <md-dialog-content layout-padding style="width: 350px">
-        
-        <form name="produtoForm" novalidate="true">
-           <!-- <input name="Nome" -->
-          <div layout layout-sm="column">  
-            <md-input-container style="width: 100%;">  
-                <label> Descrição </label>
-                    <input type="text" name="descricao" ng-model="entidade.descricao" required maxlength=200>
-                        <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.descricao.$error">
-                            <div ng-message="required">
-                                Campo obrigatório.
+        <md-card>
+            <center>
+                <h2> Produto </h2>
+            </center>
+            <md-dialog-content layout-padding style="width: 350px">
+
+                <form name="produtoForm" novalidate="true">
+                    <!-- <input name="Nome" -->
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 100%;">  
+                            <label> Descrição </label>
+                            <input type="text" name="descricao" ng-model="entidade.descricao" required maxlength=200>
+                            <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.descricao.$error">
+                                <div ng-message="required">
+                                    Campo obrigat�rio.
+                                </div>
                             </div>
-                        </div>
-            </md-input-container>
-          </div>    
-            
-          <div layout layout-sm="column">  
-            <md-input-container style="width: 70%;">  
-                <label> Marca </label>
-                    <input type="text" name="marca" ng-model="entidade.marca"  maxlength=50>
-            </md-input-container>
-          </div>        
-        
-          <div layout layout-sm="column">  
-            <md-input-container style="width: 70%;">  
-                <label> Valor Unitário </label>
-                    <input type="number" name="valor" ng-model="entidade.valorUnitario" required>
-                        <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.valor.$error">
-                            <div ng-message="required">
-                                Campo obrigatório.
+                        </md-input-container>
+                    </div>    
+
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 70%;">  
+                            <label> Marca </label>
+                            <input type="text" name="marca" ng-model="entidade.marca"  maxlength=50>
+                        </md-input-container>
+                    </div>        
+
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 70%;">  
+                            <label> Valor Unitário </label>
+                            <input type="number" name="valor" ng-model="entidade.valorUnitario" required>
+                            <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.valor.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
                             </div>
-                        </div>
-            </md-input-container>
-          </div>          
-            
-          <div layout layout-sm="column">
-              <md-input-container style="width:70%;">
-                <label> Saldo de Estoque </label>
-                  <input type="number" name="estoque" ng-model="entidade.saldoEstoque" required>
-                    <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.estoque.$error">
-                            <div ng-message="required">
-                                Campo obrigatório.
+                        </md-input-container>
+                    </div>          
+
+                    <div layout layout-sm="column">
+                        <md-input-container style="width:70%;">
+                            <label> Saldo de Estoque </label>
+                            <input type="number" name="estoque" ng-model="entidade.saldoEstoque" required>
+                            <div ng-show="frm.$submitted || frm.nome.$touched" ng-messages="produtoForm.estoque.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
                             </div>
-                        </div>
-              </md-input-container>
-          </div>    
-                
-              
-              
-          <!--  
-            <label> Cidade </label>
-            <input name="cidade" required maxlength=100>
-            <div ng-messages="clienteForm.cidade.$error">
-                <div ng-message="required">
-                    Campo obrigatório.
-                </div>
-            </div>
-            <label> Estado </label>
-            <input name="estado" required maxlength=100>
-            <div ng-messages="clienteForm.cidade.$error">
-                <div ng-message="required">
-                    Campo obrigatório.
-                </div>
-            </div>
-          </md-input-container>-->    
-            <div class="md-actions" layout="row">
-               
-                <md-button ng-click="cancelar()" >
-                    Cancelar
-                </md-button>
-                
-                <md-button ng-click="salvar()"  class="md-primary">
-                    Salvar
-                </md-button>
-            </div>      
-        
-            
-        </form>
-        
-    
-    </md-dialog-content>
-    </md-card>   
+                        </md-input-container>
+                    </div>    
+
+
+
+                    <!--  
+                      <label> Cidade </label>
+                      <input name="cidade" required maxlength=100>
+                      <div ng-messages="clienteForm.cidade.$error">
+                          <div ng-message="required">
+                              Campo obrigatório.
+                          </div>
+                      </div>
+                      <label> Estado </label>
+                      <input name="estado" required maxlength=100>
+                      <div ng-messages="clienteForm.cidade.$error">
+                          <div ng-message="required">
+                              Campo obrigatório.
+                          </div>
+                      </div>
+                    </md-input-container>-->    
+                    <div class="md-actions" layout="row">
+
+                        <md-button ng-click="cancelar()" >
+                            Cancelar
+                        </md-button>
+
+                        <md-button ng-click="salvar()"  class="md-primary">
+                            Salvar
+                        </md-button>
+                    </div>      
+
+
+                </form>
+
+
+            </md-dialog-content>
+        </md-card>   
     </div>    
 
 </md-dialog>

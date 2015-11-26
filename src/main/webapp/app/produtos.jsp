@@ -12,8 +12,8 @@
 
         </section>
 
-         <md-content >
-             <md-card>
+        <md-content >
+            <md-card>
                 <md-data-table-toolbar ng-show="!selected.length">
                     <h2 class="md-title">Cadastro de Produtos</h2>
                 </md-data-table-toolbar>
@@ -21,13 +21,13 @@
 
                 <md-data-table-toolbar class="alternate" ng-show="selected.length" layout="row" layout-align="space-between center" style="padding-left: 95px;" width="100%" height="78">
                     <div>{{selected.length}} {{selected.length > 1 ? 'produtos selecionados' : 'produto selecionado'}}</div>
-                    
+
                     <md-button class="md-icon-button md-raised" aria-label="Excluir" ng-click="dialogExcluirProduto($event, produtosExcluir)">
-                <i class="md-icon-delete md-icon-lg"></i>
-            </md-button>
+                        <i class="md-icon-delete md-icon-lg"></i>
+                    </md-button>
                 </md-data-table-toolbar>
 
-                 <md-data-table-container>
+                <md-data-table-container>
                     <table md-data-table class="md-primary" md-row-select="selected" md-progress="deferred">
                         <thead md-order="query.order" md-trigger="onorderchange">
                             <tr>
@@ -37,8 +37,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="produto in produtos | orderBy: query.order | limitTo: query.limit: (query.page -1) *
-                                        query.limit" ng-click="produtoClicked($event, produto)">
+                            <tr ng-repeat="produto in produtos track by $index| orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                                                  query.limit" ng-click="produtoClicked($event, produto)">
 
                                 <td>{{produto.descricao}}</td>
                                 <td>{{produto.marca}}</td>
@@ -59,10 +59,10 @@
         </md-content>
     </div>    
     <div>
-       
+
 
     </div>
-      
+
 </html>
 
 
