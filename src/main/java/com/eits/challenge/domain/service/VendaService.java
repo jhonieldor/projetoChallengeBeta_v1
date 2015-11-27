@@ -61,7 +61,7 @@ public class VendaService {
 		salvarVenda(venda);
 	}
 	
-	public BigDecimal calcularTotalVenda(List<ProdutoVenda> produtos){
+	public Double calcularTotalVenda(List<ProdutoVenda> produtos){
 		
 		Double totalVenda = 0.0;
 		
@@ -69,12 +69,16 @@ public class VendaService {
 			totalVenda = totalVenda + produto.getValor().doubleValue();
 		}
 		
-		return BigDecimal.valueOf(totalVenda);
+		return totalVenda;
 	}
 	
 	
         public  List<Cliente> buscarClientes(){
             return clienteRepository.findAll();
+        }
+        
+        public List<Produto> buscarProdutos(){
+            return produtoRepository.findAll();
         }
         
 	public void salvarVenda(Venda venda){

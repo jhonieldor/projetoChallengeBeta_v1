@@ -38,26 +38,25 @@
 
             <md-card>
 
-                <md-data-table-toolbar ng-show="!selected.length">
+                <md-data-table-toolbar ng-show="!produtosVendaSelecionados.length">
                     <h3 class="md-title">Produtos da Venda</h3>
                 </md-data-table-toolbar>
 
 
-                <md-data-table-toolbar class="alternate" ng-show="produtosVendaSeleciondaos.length" layout="row" layout-align="space-between center"
+                <md-data-table-toolbar class="alternate" ng-show="produtosVendaSelecionados.length" layout="row" layout-align="space-between center"
                                        style="padding-left: 95px;" width="100%" heignt = "78">
                     <div>{{produtosVendaSelecionados.length}} {{produtosVendaSelecionados.length> 1 ? 'produtos selecionados' : 'produto selecionado'}}</div>
 
-                    <md-button class="md-icon-button md-raised" aria-label="Excluir" >
-                        <i clas="md-icon-delete md-icon-lg"></i>
+                    <md-button class="md-icon-button md-raised" aria-label="Excluir" ng-click="dialogExcluirProduto($event, produtosExcluir)" >
+                        <i class="md-icon-delete md-icon-lg"></i>
                     </md-button>
-
                 </md-data-table-toolbar>
 
                 <md-data-table-container>
-                    <table md-data-table class="md-primary" md-progress="deferred">
+                    <table md-data-table class="md-primary" md-row-select="produtosVendaSelecionados" md-progress="deferred">
                         <thead md-order="query.order" md-trigger="onorderchange">
                             <tr>
-                                <th order-by="produto" name="Produto"></th>
+                                <th order-by="descricao" name="Produto"></th>
                                 <th order-by="valorUnitario" name="Valor Unit."></th>
                                 <th order-by="quantidade" name="Quantidade"></th>
                                 <th order-by="valorTotal" name="Valor Total"></th>
@@ -84,7 +83,7 @@
             <md-card>
                 <md-data-table-toolbar>
                     <h2 class="md-title"> Total da Venda :  </h2>
-                    <h2 class="md-title" >  R$ 500,00 </h2>
+                    <h2 class="md-title" > {{ ((venda.valorTotal) | currency: 'R$ ')}} </h2> 
                 </md-data-table-toolbar> 
             </md-card>
         </md-content>

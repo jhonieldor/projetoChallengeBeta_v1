@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<md-dialog aria-label="Seleção de Produtos">
+<md-dialog aria-label="Seleção de Produtos" ng-init="buscarProdutos()">
     <div layout="column" ng-cloak>
         <md-card>
             <center>
@@ -20,15 +20,20 @@ and open the template in the editor.
 
                         <md-autocomplete flex required
                                          md-input-name="autocompleteProduto"
-                                         md-no-cache="true"
                                          md-selected-item="produtoSelecionado"
-                                         md-search-text="buscarProdutos(produto.descricao)"
-                                         md-items="produto in buscarProdutos(produto.descricao)"
+                                         md-no-cache = "false"
+                                         md-search-text="searchTextProduto"
+                                         md-items="produto in querySearchForProdutos(searchTextProduto)"
                                          md-item-text="produto.descricao"
-                                         md-floating-label="Pesquisar produto">
+                                         placeholder="Pesquisar produto">
                             <md-item-template>
-                                <span md-highlight-text="ctrl.searchText">{{produto.descricao}}</span>
+                                <span md-highlight-text="searchTextProduto">{{produto.descricao}}</span>
                             </md-item-template>
+                            
+                            <md-not-found>
+                                    Nenhum resultado encontrado.
+                             </md-not-found>
+
                             <div ng-messages="searchForm.autocompleteField.$error" ng-if="produtoVendaForm.autocompleteProduto.$touched">
                                 <div ng-message="required">Selecione o produto!</div>
                             </div> 
@@ -41,17 +46,17 @@ and open the template in the editor.
                     <div layout layout-sm="column">
                         <md-input-container style="width: 50%">
                             <label> Quantidade </label>
-                            <input type="number">
+                            <input type="number" ng-model="quantidade" min="1">
                         </md-input-container>
                     </div>
-
+                    
                     <div flex layout layout-sm="column">
                         <md-card  style="width: 100%">
                             <div>
                                 <label> Valor Unitário </label>
                             </div>
                             <div>
-                                <h2> R$ 10,00 </h2>
+                                <h2> {{ produtoSelecionado != null ? (produtoSelecionado.valorUnitario | currency: 'R$ ') : 'R$ 0,00' }} </h2>
                             </div>    
                         </md-card>
                     </div>
@@ -62,7 +67,7 @@ and open the template in the editor.
                                 <label> Valor Total </label>
                             </div>
                             <div>
-                                <h2> R$ 10,00 </h2>
+                                <h2> {{ produtoSelecionado != null ? ( (produtoSelecionado.valorUnitario * quantidade) | currency: 'R$ ') : 'R$ 0,00' }} </h2>
                             </div>    
                         </md-card>
 
@@ -74,7 +79,7 @@ and open the template in the editor.
                             Cancelar
                         </md-button>
 
-                        <md-button ng-click="salvar()"  class="md-primary">
+                        <md-button ng-click="confirmar()"  class="md-primary">
                             Salvar
                         </md-button>
                     </div>      

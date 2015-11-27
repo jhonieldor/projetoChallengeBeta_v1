@@ -36,7 +36,6 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
             return -1;
         }
 
-
         $scope.carregarLista();
 
         $scope.onopenchange = function (page, limit) {
