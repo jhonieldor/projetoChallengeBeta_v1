@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<md-dialog aria-label="Alteração do Produto">
+    
+     <div layout="column" ng-cloak>
+        <md-card>
+            <center>
+                <h2> Produto da Venda </h2>
+            </center>
+            <md-dialog-content layout-padding style="width: 400px">
+                <form name="produtoVendaForm" novalidate="true">
+                    <div layout layout-sm="column">
+                       <md-card  style="width: 100%">
+                            <div>
+                                <label> Produto Selecionado </label>
+                            </div>
+                            <div>
+                                <h2> {{entidade.produto.descricao}} </h2>
+                            </div>    
+                        </md-card>
+
+                        
+                    </div>
+
+                    <div layout layout-sm="column">
+                        <md-input-container style="width: 50%">
+                            <label> Quantidade </label>
+                            <input type="number" ng-model="entidade.quantidade" min="1">
+                        </md-input-container>
+                    </div>
+                    
+                    <div flex layout layout-sm="column">
+                        <md-card  style="width: 100%">
+                            <a href="../../clientes.jsp"></a>
+                            <div>
+                                <label> Valor Unitário </label>
+                            </div>
+                            <div>
+                                <h2> {{ entidade.produto != null ? (entidade.produto.valorUnitario | currency: 'R$ ') : 'R$ 0,00' }} </h2>
+                            </div>    
+                        </md-card>
+                    </div>
+
+                    <div flex layout layout-sm="column">
+                        <md-card  style="width: 100%">
+                            <div>
+                                <label> Valor Total </label>
+                            </div>
+                            <div>
+                                <h2> {{ entidade.produto != null ? ( (entidade.produto.valorUnitario * entidade.quantidade) | currency: 'R$ ') : 'R$ 0,00' }} </h2>
+                            </div>    
+                        </md-card>
+
+                    </div>
+
+                    <div class="md-actions" layout="row">
+
+                        <md-button ng-click="cancelar()" >
+                            Cancelar
+                        </md-button>
+
+                        <md-button ng-click="atualizar()"  class="md-primary">
+                            Salvar
+                        </md-button>
+                    </div>      
+
+
+                </form>
+
+            </md-dialog-content>
+
+
+        </md-card>
+
+    </div>
+    
+</md-dialog>

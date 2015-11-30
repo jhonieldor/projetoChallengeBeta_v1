@@ -9,7 +9,7 @@
     
 <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button ng-click="lancarVendas()">Lançar Venda</md-button>
+            <md-button class="md-raised" ng-click="lancarVendas()">Lançar Venda</md-button>
           
         </section>
 

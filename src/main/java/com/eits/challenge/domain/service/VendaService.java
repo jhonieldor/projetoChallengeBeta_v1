@@ -21,91 +21,110 @@ import com.eits.challenge.domain.repository.IVendaRepository;
 
 @Service
 @Transactional
-@RemoteProxy(name="vendaService")
+@RemoteProxy(name = "vendaService")
 public class VendaService {
 
-	@Autowired
-	private IProdutoRepository produtoRepository;
-	
-	@Autowired
-	private IVendaRepository vendaRepository;
-	
-	@Autowired
-	private IProdutoVendaService produtoVendaRepository;
-	
-	@Autowired
-	private IClienteRepository clienteRepository;
+    @Autowired
+    private IProdutoRepository produtoRepository;
 
-	private BigDecimal totalVendas;
-	
-	
-	public void addProduto(ProdutoVenda produtoVenda, List<ProdutoVenda> produtos, Produto produto, Venda venda){
-		produtoVenda.setVenda(venda);
-		produtoVenda.setProduto(produto);
-		
-		produtoVendaRepository.save(produtoVenda);
-		atualizarProduto(produto, produtoVenda);
-	}
+    @Autowired
+    private IVendaRepository vendaRepository;
 
-	public void atualizarProduto(Produto produto, ProdutoVenda produtoVenda){
-		Integer saldoAtual = produto.getSaldoEstoque();
-		produto.setSaldoEstoque(saldoAtual - produtoVenda.getQuantidade());
-		produto.setProdutoVendido(true);
-		produtoRepository.save(produto);
-	}
-	
-	public void lancarVenda(Venda venda, Usuario usuario, Cliente cliente){
-		venda.setCliente(cliente);
-		venda.setUsuario(usuario);
-		venda.setDataVenda(Calendar.getInstance());
-		salvarVenda(venda);
-	}
-	
-	public Double calcularTotalVenda(List<ProdutoVenda> produtos){
-		
-		Double totalVenda = 0.0;
-		
-		for(ProdutoVenda produto: produtos){
-			totalVenda = totalVenda + produto.getValor().doubleValue();
-		}
-		
-		return totalVenda;
-	}
-	
-	
-        public  List<Cliente> buscarClientes(){
-            return clienteRepository.findAll();
+    @Autowired
+    private IProdutoVendaService produtoVendaRepository;
+
+    @Autowired
+    private IClienteRepository clienteRepository;
+
+    private BigDecimal totalVendas;
+
+    public void addProduto(ProdutoVenda produtoVenda, List<ProdutoVenda> produtos, Produto produto, Venda venda) {
+        //produtoVenda.setVenda(venda);
+        produtoVenda.setProduto(produto);
+
+        produtoVendaRepository.save(produtoVenda);
+        atualizarProduto(produto, produtoVenda);
+    }
+
+    public void atualizarProduto(Produto produto, ProdutoVenda produtoVenda) {
+        Integer saldoAtual = produto.getSaldoEstoque();
+        produto.setSaldoEstoque(saldoAtual - produtoVenda.getQuantidade());
+        produto.setProdutoVendido(true);
+        produtoRepository.save(produto);
+    }
+
+    public void lancarVenda(Venda venda, Usuario usuario, Cliente cliente) {
+        venda.setCliente(cliente);
+        venda.setUsuario(usuario);
+        venda.setDataVenda(Calendar.getInstance());
+        salvarVenda(venda);
+    }
+
+    public Double calcularTotalVenda(List<ProdutoVenda> produtos) {
+
+        Double totalVenda = 0.0;
+
+        for (ProdutoVenda produto : produtos) {
+            totalVenda = totalVenda + produto.getValor().doubleValue();
         }
+
+        return totalVenda;
+    }
+
+    public void salvarVenda(Venda venda) {
+        vendaRepository.save(venda);
+        venda.getCliente().setExclusaoBloqueada(true);
+        clienteRepository.save(venda.getCliente());
+    }
+    
+    public void salvarProdutoVenda(ProdutoVenda produto, Venda venda){
+
+    	ProdutoVenda produtoVenda = produtoVendaRepository.findOne(produto.getId());
+    	
+        produtoVendaRepository.save(produtoVenda);
         
-        public List<Produto> buscarProdutos(){
-            return produtoRepository.findAll();
-        }
+        /*int saldoAtual = produto.getProduto().getSaldoEstoque();
+        produto.getProduto().setSaldoEstoque(saldoAtual - produto.getQuantidade());
+        produto.getProduto().setProdutoVendido(true);
+        produtoRepository.save(produto.getProduto());*/
+        		
+        		
+        		
+    }
+    
+    public void salvarProdutos(List<ProdutoVenda> produtos){
+    	produtoVendaRepository.save(produtos);
         
-	public void salvarVenda(Venda venda){
-		vendaRepository.save(venda);
-	}
-	
-	public List<Venda> listarVendas(){
-		return vendaRepository.findAll();
-	}
-	
-	public void estornarVenda(Venda venda){
-		venda.setEstornada(true);
-	}
-	
+        /*for(ProdutoVenda produto: produtos){
+            produto.setVenda(venda);
+            produtoVendaRepository.save(produto);
+        }*/
+    }
+    
 
-	public BigDecimal getTotalVendas() {
-		return totalVendas;
-	}
+    public List<Cliente> buscarClientes() {
+        return clienteRepository.findAll();
+    }
 
+    public List<Produto> buscarProdutos() {
+        return produtoRepository.findAll();
+    }
 
-	public void setTotalVendas(BigDecimal totalVendas) {
-		this.totalVendas = totalVendas;
-	}
+    public List<Venda> listarVendas() {
+        return vendaRepository.findAll();
+    }
 
-	
-	
-	
+    public void estornarVenda(Venda venda) {
+        venda.setEstornada(true);
+    }
+
+    public BigDecimal getTotalVendas() {
+        return totalVendas;
+    }
+
+    public void setTotalVendas(BigDecimal totalVendas) {
+        this.totalVendas = totalVendas;
+    }
+
 	//public void lancarVenda()
-	
 }

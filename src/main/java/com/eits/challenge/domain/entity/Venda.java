@@ -2,8 +2,10 @@ package com.eits.challenge.domain.entity;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,28 +26,28 @@ public class Venda extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = 6358607431382694046L;
 
-	@OneToMany
-	private Set<ProdutoVenda> produtos;
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
+	private List<ProdutoVenda> produtos;
+
 	private Calendar dataVenda;
-	
+
 	private BigDecimal valorTotal;
-	
+
 	private Boolean estornada;
-	
+
 	@OneToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
+
 	@OneToOne
 	@JoinColumn(name= "usuario_id")
 	private Usuario usuario;
 
-	public Set<ProdutoVenda> getProdutos() {
+	public List<ProdutoVenda> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(Set<ProdutoVenda> produtos) {
+	public void setProdutos(List<ProdutoVenda> produtos) {
 		this.produtos = produtos;
 	}
 
@@ -150,14 +152,14 @@ public class Venda extends AbstractEntity {
 
 	@Override
 	public String toString() {
-		return "Venda [produtos=" + produtos + ", dataVenda=" + dataVenda + ", valorTotal=" + valorTotal
+		return "Venda [dataVenda=" + dataVenda + ", valorTotal=" + valorTotal
 				+ ", estornada=" + estornada + ", cliente=" + cliente + ", usuario=" + usuario + "]";
 	}
-	
-	
-	
-	
-	
 
-	
+
+
+
+
+
+
 }

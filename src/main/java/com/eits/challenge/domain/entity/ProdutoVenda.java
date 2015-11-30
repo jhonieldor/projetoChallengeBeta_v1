@@ -30,9 +30,9 @@ public class ProdutoVenda extends AbstractEntity {
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
 	
-	@ManyToOne
+	/*@ManyToOne(fetch.)
 	@JoinColumn(name = "venda_id")
-	private Venda venda;
+	private Venda venda;*/
 	
 	@Column
 	private BigDecimal valor;
@@ -65,13 +65,13 @@ public class ProdutoVenda extends AbstractEntity {
 		this.quantidade = quantidade;
 	}
 
-	public Venda getVenda() {
+	/*public Venda getVenda() {
 		return venda;
 	}
 
 	public void setVenda(Venda venda) {
 		this.venda = venda;
-	}
+	}*/
 	
 	
 }

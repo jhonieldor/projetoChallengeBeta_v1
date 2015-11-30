@@ -38,7 +38,7 @@
                     md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
             <div>
                 <md-content layout="column"> 
-                    <md-button href="#/clientes">
+                    <md-button  href="#/clientes">
                         Clientes 
                     </md-button>
 

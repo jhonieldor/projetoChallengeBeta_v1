@@ -16,14 +16,36 @@
                             <h2 class="md-title"> Dados da Venda </h2>
                         </md-data-table-toolbar>
 
+                        <form name="vendaForm" novalidate="true">
+                            <div layout layout-sm="column">
+                                <md-input-container style="width: 500px">
+                                    <label>Cliente</label>
+                                    <md-autocomplete flex required 
+                                                     md-input-name="autocompleteCliente"
+                                                     md-selected-item="venda.cliente"
+                                                     md-no-cache="true"
+                                                     md-search-text="searchTextCliente"
+                                                     md-items="cliente in querySearchForClientes(searchTextCliente)"
+                                                     md-item-text="cliente.nome"
+                                                     placeholder="Pesquisar cliente">
 
-                        <div layout layout-sm="column">
-                            <md-input-container style="width: 500px">
-                                <label>Cliente</label>
-                                <input >
-                            </md-input-container>
-                            <md-datepicker ng-model="venda.dataVenda" md-placeholder="Data da Venda"></md-datepicker>
-                        </div>
+                                        <md-item-template>
+                                            <span md-highlight-text="searchTextCliente">{{cliente.nome}}</span>
+                                        </md-item-template>
+
+                                        <md-not-found>
+                                            Nenhum cliente encontrado com esse nome.
+                                        </md-not-found>
+
+                                        <div ng-messages="searchForm.autocompleteField.$error" ng-if="vendaForm.autocompleteCliente.$touched">
+                                            <div ng-message="required">Informe o cliente!</div>
+                                        </div> 
+
+                                    </md-autocomplete>
+                                </md-input-container>
+                                <md-datepicker ng-model="venda.dataVenda" md-placeholder="Data da Venda"></md-datepicker>
+                            </div>
+                        </form>
                     </md-content>
                 </md-card>
 
@@ -33,7 +55,7 @@
 
         <md-content>
             <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-                <md-button ng-click="dialogAddProdutoVenda($event)">Adicionar Produto</md-button>
+                <md-button class="md-raised" ng-click="dialogAddProdutoVenda($event)">Adicionar Produto</md-button>
             </section>
 
             <md-card>
@@ -59,15 +81,15 @@
                                 <th order-by="descricao" name="Produto"></th>
                                 <th order-by="valorUnitario" name="Valor Unit."></th>
                                 <th order-by="quantidade" name="Quantidade"></th>
-                                <th order-by="valorTotal" name="Valor Total"></th>
+                                <th order-by="valor" name="Valor Total"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="produtoVenda in produtosVenda">
+                            <tr ng-repeat="produtoVenda in produtosVenda"  ng-click="produtoVendaClicked($event, produtoVenda)">
                                 <td> {{produtoVenda.produto.descricao}} </td>
-                                <td> {{produtoVenda.produto.valorUnitario}}</td>
+                                <td> {{produtoVenda.produto.valorUnitario| currency: 'R$ ' }}</td>
                                 <td>{{produtoVenda.quantidade}}</td>
-                                <td>{{produtoVenda.valorTotal}}</td>
+                                <td>{{produtoVenda.valor| currency: 'R$ '}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -90,11 +112,11 @@
 
         <md-content>
             <section layout="row" layout-sm="column" layout-align="right" layout-wrap>      
-                <md-button href="#/vendas" ng-click="salvarVenda()"  class="md-primary">
+                <md-button class="md-raised" href="#/vendas" ng-click="salvarVenda(venda, produtosVenda)">
                     Salvar
                 </md-button>
 
-                <md-button ng-click="cancelarVenda()" >
+                <md-button class="md-raised" ng-click="dialogCancelarVenda($event)" >
                     Cancelar
                 </md-button>
 
