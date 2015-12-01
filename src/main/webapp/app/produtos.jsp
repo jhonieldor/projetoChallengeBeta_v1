@@ -8,7 +8,7 @@
 
     <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button ng-click="dialogNovoProduto($event)">Novo Produto</md-button>
+            <md-button class="md-raised" ng-click="dialogNovoProduto($event)">Novo Produto</md-button>
 
         </section>
 
@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="produto in produtos track by $index| orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                            <tr md-disable-select="produto.produtoVendido" ng-repeat="produto in produtos track by $index| orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                                   query.limit" ng-click="produtoClicked($event, produto)">
 
                                 <td>{{produto.descricao}}</td>

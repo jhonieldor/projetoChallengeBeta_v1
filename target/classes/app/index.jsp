@@ -10,15 +10,15 @@
         <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
         <link rel="stylesheet" type="text/css" href="js/md-data-table/md-data-table.css">
         <link rel="stylesheet" href="css/style.css"> -->
-        
-       
-        
+
+
+
         <!-- Custom Directive -->
-		<!--  <script type="text/javascript" src="./js/eits-bottomsheet/eits-bottomsheet.js"></script>
-		<script type="text/javascript" src="./js/numbers-only/numbers-only.js"></script>
-		<script type="text/javascript" src="./js/currency/currency-directive.js"></script>-->
-        
-        
+        <!--  <script type="text/javascript" src="./js/eits-bottomsheet/eits-bottomsheet.js"></script>
+        <script type="text/javascript" src="./js/numbers-only/numbers-only.js"></script>
+        <script type="text/javascript" src="./js/currency/currency-directive.js"></script>-->
+
+
     </head>
 
     <body layout="column" ng-controller="AppCtrl">
@@ -42,7 +42,7 @@
                         Clientes 
                     </md-button>
 
-                    <md-button href="#/produtos">
+                    <md-button  href="#/produtos">
                         Produtos
                     </md-button >
 
@@ -50,18 +50,14 @@
                         Vendas
                     </md-button>
 
-
-
-
-
                 </md-content>
             </div>
 
         </md-sidenav>
-        
+
         <div ng-view layout-fill>
         </div>
-        
+
 
     </div>
 
@@ -74,14 +70,14 @@
     <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here-->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>-->
     <script src="./app/js/md-data-table/md-data-table.js"></script> 
-        
-     <!-- Styles -->
-     <jsp:include page="default-styles.jsp"/>
 
-     <!-- Scripts -->
-     <jsp:include page="default-scripts.jsp"/>
-        
-        
+    <!-- Styles -->
+    <jsp:include page="default-styles.jsp"/>
+
+    <!-- Scripts -->
+    <jsp:include page="default-scripts.jsp"/>
+
+
     <!-- Controllers -->
     <script src="./app/appMain.js"></script>    
     <script src="./app/js/controllers/abstract-crud-controller.js"></script>

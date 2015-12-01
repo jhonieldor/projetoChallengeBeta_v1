@@ -7,20 +7,13 @@
 <html xmlns:ng="http://angularjs.org" lang="pt">
 <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button ng-click="dialogNovoCliente($event)">Novo Cliente</md-button>
-            
-            <!--<md-button class="md-fab md-accent md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopup($event)">
-                <i class="md-icon md-icon-add md-icon-lg"></i>
-            </md-button>-->
-            
-            
-            
+            <md-button class="md-raised" ng-click="dialogNovoCliente($event)">Novo Cliente</md-button>
         </section>
 
 </div>    
 
 <div>
-<md-content >
+<md-content>
     <md-card>
         <md-data-table-toolbar ng-show="!selected.length">
           <h2 class="md-title">Cadastro de Clientes</h2>
@@ -47,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  ng-repeat="cliente in clientes | orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                    <tr md-disable-select="cliente.exclusaoBloqueada" ng-repeat="cliente in clientes | orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                                   query.limit" ng-click="clienteClicked($event, cliente)">
                     
                         <td>{{cliente.nome}}</td>

@@ -112,7 +112,7 @@
 
         <md-content>
             <section layout="row" layout-sm="column" layout-align="right" layout-wrap>      
-                <md-button class="md-raised" href="#/vendas" ng-click="salvarVenda(venda, produtosVenda)">
+                <md-button class="md-raised" href="#/vendas" ng-click="salvarVenda()">
                     Salvar
                 </md-button>
 

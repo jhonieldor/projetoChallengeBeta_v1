@@ -26,9 +26,9 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
 
 
             $routeProvider
-                    .when('/', {
-                        templateUrl: './app/welcome.jsp'
-                    })
+                    /*.when('/', {
+                        templateUrl: './app/vendas.jsp'
+                    })*/
 
                     .when('/clientes', {
                         templateUrl: './app/clientes.jsp',
@@ -50,15 +50,21 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
                         controller: 'UsuarioCtlr'
                     })
 
-                    .when('/lancamento_vendas', {
+                  .when('/lancamento_vendas', {
                         templateUrl: './app/lancamento_vendas.jsp',
                         controller: 'VendaCtrl'
 
                     })
+                    
+                   .when('/lancamento_vendas/:id', {
+                        templateUrl: './app/lancamento_vendas.jsp',
+                        controller: 'VendaCtrl'
+
+                    }) 
 
 
                     .otherwise({
-                        redirectTo: '/'
+                        redirectTo: '/vendas'
                     });
 
 

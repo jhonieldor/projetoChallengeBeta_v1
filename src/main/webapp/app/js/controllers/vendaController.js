@@ -1,5 +1,6 @@
 app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '$injector', '$importService', '$mdDialog', '$timeout', '$location',
-    function ($q, $scope, $rootScope, $mdToast, $log, $injector, $importService, $mdDialog, $timeout, $location) {
+    '$routeParams',
+    function ($q, $scope, $rootScope, $mdToast, $log, $injector, $importService, $mdDialog, $timeout, $location, $routeParams) {
         $importService("vendaService");
         $scope.selected = [];
 
@@ -10,9 +11,39 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
         $scope.venda.dataVenda = new Date();
         $scope.venda.cliente = null;
 
-        if ($location.path() == '/lancamento_vendas') {
-            $rootScope.mainMenu = false;
 
+        $scope.produtoVendaClicked = function (ev, produtoVenda) {
+            $scope.dialogAlterarProduto(ev, produtoVenda);
+        }
+
+        $scope.carregarVenda = function (ev, venda) {
+            $rootScope.mainMenu = false;
+            $location.path('/lancamento_vendas/' + venda.id);
+        };
+
+
+        $scope.lancarVendas = function () {
+            $location.path('/lancamento_vendas');
+            $rootScope.mainMenu = false;
+        }
+
+        $scope.buscarVenda = function (id) {
+            vendaService.buscarVenda(id, {
+                callback: function (result) {
+                    $scope.venda = result;
+                    $scope.carregarProdutosVenda(result);
+                    $scope.$apply();
+                }, errorHandler: function (a, b) {
+                    console.log(a);
+                }
+            })
+        };
+
+
+        var path = '/lancamento_vendas/' + $routeParams.id;
+        if (($location.path() == '/lancamento_vendas') || ($location.path() == path)) {
+            $rootScope.mainMenu = false;
+            $scope.buscarVenda($routeParams.id);
         } else {
             $rootScope.mainMenu = true;
         }
@@ -37,13 +68,12 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
         $scope.produtosVendaSelecionados = [];
         $scope.produtosExcluir = [];
         $scope.produtoSelecionado = null;
-
+        $scope.totalVendas = 0;
 
 
         $scope.desabilitarMenu = function () {
             $rootScope.mainMenu = false;
         }
-
 
 
         $scope.buscarClientes = function () {
@@ -82,16 +112,32 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
             })
         }
 
+        $scope.vendaClicked = function (ev, venda) {
+            $scope.carregarVenda(ev, venda);
+        };
+
+
         $scope.carregarVendas = function () {
             vendaService.listarVendas({
                 callback: function (result) {
                     $scope.vendas = result;
+                    $scope.processarTotalVendas();
                     $scope.$apply();
                 }, errorHandler: function (a, b) {
                     console.log(a);
                 }
             });
         };
+
+        $scope.processarTotalVendas = function () {
+            $scope.totalVendas = 0;
+            for (var i = 0; i < $scope.vendas.length; i++) {
+                if (!$scope.vendas[i].estornada) {
+                    $scope.totalVendas = $scope.totalVendas + $scope.vendas[i].valorTotal;
+                }
+            }
+        }
+
 
         $scope.recalcularTotal = function () {
             $scope.valor = 0;
@@ -112,6 +158,7 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
                     $log.error(message);
                 }
             });
+            //processarTotalVendas();
         }
 
         $scope.dialogAddProdutoVenda = function (ev) {
@@ -198,14 +245,8 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
                     $scope.venda.valorTotal = $scope.venda.valorTotal - $scope.produtosVenda[i].valor;
                     $scope.produtosVenda.splice(i, 1);
                 }
-                //$scope.$apply();
             }, function () {
             });
-        }
-
-
-        $scope.produtoVendaClicked = function (ev, produtoVenda) {
-            $scope.dialogAlterarProduto(ev, produtoVenda);
         }
 
 
@@ -250,6 +291,57 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
             return -1;
         };
 
+        $scope.estornarVenda = function (venda) {
+            vendaService.estornarVenda(venda, {
+                callback: function (result) {
+                    $scope.carregarVendas();
+                    $scope.processarTotalVendas();
+                    $mdToast.cancel();
+                    var toast = $mdToast.simple()
+                            .content('Estorno de venda realizado com sucesso!')
+                            .action('Fechar')
+                            .highlightAction(false)
+                            .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+
+                    $scope.$apply();
+                },
+                errorHandler: function (message, exception) {
+                    $mdToast.showSimple(message);
+                    $log.error("Erro ao estornar a venda", message);
+                }
+            })
+
+        };
+        
+        
+        $scope.relancarVenda = function (venda) {
+            vendaService.relancarVenda(venda, {
+                callback: function (result) {
+                    $scope.carregarVendas();
+                    $scope.processarTotalVendas();
+                    $mdToast.cancel();
+                    var toast = $mdToast.simple()
+                            .content('Relançamento de venda realizado com sucesso!')
+                            .action('Fechar')
+                            .highlightAction(false)
+                            .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+
+                    $scope.$apply();
+                },
+                errorHandler: function (message, exception) {
+                    $mdToast.showSimple(message);
+                    $log.error("Erro ao relançar a venda", message);
+                }
+            })
+
+        };
+        
+
+
         $scope.dialogCancelarVenda = function (ev) {
             var confirm = $mdDialog.confirm()
                     .title('Cancelar o Lançamento de Venda')
@@ -267,6 +359,37 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
                 $mdDialog.hide();
             });
         }
+
+        $scope.dialogEstornarVenda = function (ev, venda) {
+            var confirm = $mdDialog.confirm()
+                    .title('Estornar Venda')
+                    .content('Deseja realmente estornar a venda selecionada? Esta operação irá estornar o saldo de estoque dos produtos vinculados.')
+                    .ariaLabel('Estornar Venda')
+                    .ok('Sim')
+                    .cancel('Cancelar')
+                    .targetEvent(ev);
+
+            $mdDialog.show(confirm).then(function () {
+                $scope.estornarVenda(venda);
+                $mdDialog.hide();
+            });
+        }
+        
+        $scope.dialogRelancarVenda = function (ev, venda) {
+            var confirm = $mdDialog.confirm()
+                    .title('Relançar Venda')
+                    .content('Esta operação irá cancelar o estorno da venda, e a venda poderá ser lançada novamente! Deseja prosseguir?')
+                    .ariaLabel('Relançar Venda')
+                    .ok('Sim')
+                    .cancel('Cancelar')
+                    .targetEvent(ev);
+
+            $mdDialog.show(confirm).then(function () {
+                $scope.relancarVenda(venda);
+                $mdDialog.hide();
+            });
+        }
+        
 
 
         $scope.onopenchange = function (page, limit) {
@@ -289,19 +412,20 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
             return deferred.promise;
         };
 
-        $scope.lancarVendas = function () {
-            $location.path('/lancamento_vendas');
-            $rootScope.mainMenu = false;
 
-        }
 
         $scope.salvarVenda = function () {
-            $location.path('/vendas');
-            $rootScope.mainMenu = true;
             vendaService.salvarVenda($scope.venda, {
                 callback: function (result) {
                     $mdDialog.hide(result);
+                    $scope.salvarProdutos();
+                    $scope.carregarVendas();
+                    $scope.processarTotalVendas();
                     $scope.$apply();
+
+                    $location.path('/vendas');
+                    $rootScope.mainMenu = true;
+
                 },
                 errorHandler: function (message, error) {
                     $mdToast.cancel();
@@ -314,17 +438,25 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
                             });
                     $log.error(message);
                 }
-
             });
 
-            for (var i = 0; i < $scope.produtosVenda.length; i++) {
-                $scope.produtosVenda[i].venda = $scope.venda;
-            };
+        }
 
+
+        $scope.salvarProdutos = function () {
             vendaService.salvarProdutos($scope.produtosVenda, {
                 callback: function (result) {
                     $mdDialog.hide(result);
                     $scope.$apply();
+
+                    $mdToast.cancel();
+                    var toast = $mdToast.simple().content('Lançamento de venda realizado com sucesso!')
+                            .action('Fechar')
+                            .highlightAction(false)
+                            .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+
                 },
                 errorHandler: function (message, error) {
                     $mdToast.cancel();
@@ -338,29 +470,9 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
                     $log.error(message);
                 }
             });
-
-            /*for (var i = 0; i < $scope.produtosVenda.length; i++) {
-             $scope.produtosVenda[i].venda = $scope.venda;
-             vendaService.salvarProdutoVenda($scope.produtosVenda[i], {
-             callback: function (result) {
-             $mdDialog.hide(result);
-             $scope.$apply();
-             },
-             errorHandler: function (message, error) {
-             $mdToast.cancel();
-             $mdToast.show($mdToast.simple()
-             .content(message)
-             .action('Fechar')
-             .highlightAction(false)
-             .position('botttom left right'))
-             .then(function () {
-             });
-             $log.error(message);
-             }
-             
-             });
-             }*/
         }
+
+
 
         $scope.cancelarVenda = function () {
             $location.path('/vendas');

@@ -26,8 +26,8 @@ public class Venda extends AbstractEntity {
 	 */
 	private static final long serialVersionUID = 6358607431382694046L;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
-	private List<ProdutoVenda> produtos;
+	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "venda")
+	private List<ProdutoVenda> produtos;*/
 
 	private Calendar dataVenda;
 
@@ -43,13 +43,13 @@ public class Venda extends AbstractEntity {
 	@JoinColumn(name= "usuario_id")
 	private Usuario usuario;
 
-	public List<ProdutoVenda> getProdutos() {
+	/*public List<ProdutoVenda> getProdutos() {
 		return produtos;
 	}
 
 	public void setProdutos(List<ProdutoVenda> produtos) {
 		this.produtos = produtos;
-	}
+	}*/
 
 	public Calendar getDataVenda() {
 		return dataVenda;
@@ -102,7 +102,7 @@ public class Venda extends AbstractEntity {
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
 		result = prime * result + ((dataVenda == null) ? 0 : dataVenda.hashCode());
 		result = prime * result + ((estornada == null) ? 0 : estornada.hashCode());
-		result = prime * result + ((produtos == null) ? 0 : produtos.hashCode());
+		//result = prime * result + ((produtos == null) ? 0 : produtos.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
 		return result;
@@ -132,11 +132,11 @@ public class Venda extends AbstractEntity {
 				return false;
 		} else if (!estornada.equals(other.estornada))
 			return false;
-		if (produtos == null) {
+		/*if (produtos == null) {
 			if (other.produtos != null)
 				return false;
 		} else if (!produtos.equals(other.produtos))
-			return false;
+			return false;*/
 		if (usuario == null) {
 			if (other.usuario != null)
 				return false;
