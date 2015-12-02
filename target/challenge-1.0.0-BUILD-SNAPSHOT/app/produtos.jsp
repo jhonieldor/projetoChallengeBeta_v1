@@ -34,6 +34,7 @@
                                 <th order-by="descricao" name="Descrição"></th>
                                 <th order-by="marca" name="Marca"></th>
                                 <th order-by="valor" name="Valor"></th>
+                                 <th order-by="saldo" name="Saldo de Estoque"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +43,8 @@
 
                                 <td>{{produto.descricao}}</td>
                                 <td>{{produto.marca}}</td>
-                                <td>{{produto.valorUnitario}}</td>
-
+                                <td>{{produto.valorUnitario | currency : ' R$ ' }}</td>
+                                <td>{{produto.saldoEstoque}}</td>
                             </tr>
 
                         </tbody>

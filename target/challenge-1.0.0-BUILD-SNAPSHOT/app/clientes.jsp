@@ -54,9 +54,11 @@
             </table>
         </md-data-table-container>
         
-        <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{clientes.count}}" md-trigger="onpagechange"></md-data-table-pagination>
+        <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{clientes.length}}" md-trigger="onpagechange"></md-data-table-pagination>
         
     </md-card>
+    
+   
     
         
 </md-content>

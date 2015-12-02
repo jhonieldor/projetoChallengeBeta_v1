@@ -49,6 +49,10 @@
                     <md-button href="#/vendas">
                         Vendas
                     </md-button>
+                    
+                    <md-button href="#/usuarios">
+                        Usuários
+                    </md-button>
 
                 </md-content>
             </div>

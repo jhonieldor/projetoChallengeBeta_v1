@@ -9,12 +9,15 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
             $mdSidenav(menuId).toggle();
         };
 
-        if ($location != undefined && $location.path() == '/lancamento_vendas') {
-            $rootScope.mainMenu = false;
-        } else {
-            $rootScope.mainMenu = true;
+        $rootScope.mainMenu = true;
+        $rootScope.mainToolbar = true;
+        /*if ($location != undefined && $location.path() == '/lancamento_vendas') {
+         $rootScope.mainMenu = false;
+         } else {
+         $rootScope.mainMenu = true;
+         
+         }*/
 
-        }
 
 
 
@@ -27,8 +30,8 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
 
             $routeProvider
                     /*.when('/', {
-                        templateUrl: './app/vendas.jsp'
-                    })*/
+                     templateUrl: './app/vendas.jsp'
+                     })*/
 
                     .when('/clientes', {
                         templateUrl: './app/clientes.jsp',
@@ -47,20 +50,20 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
 
                     .when('/usuarios', {
                         templateUrl: './app/usuarios.jsp',
-                        controller: 'UsuarioCtlr'
+                        controller: 'UsuarioCtrl'
                     })
 
-                  .when('/lancamento_vendas', {
+                    .when('/lancamento_vendas', {
                         templateUrl: './app/lancamento_vendas.jsp',
                         controller: 'VendaCtrl'
 
                     })
-                    
-                   .when('/lancamento_vendas/:id', {
+
+                    .when('/lancamento_vendas/:id', {
                         templateUrl: './app/lancamento_vendas.jsp',
                         controller: 'VendaCtrl'
 
-                    }) 
+                    })
 
 
                     .otherwise({

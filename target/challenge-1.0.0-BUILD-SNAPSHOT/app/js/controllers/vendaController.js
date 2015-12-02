@@ -51,14 +51,10 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
 
         $scope.query = {
             order: 'name',
-            limit: 10,
+            limit: 5,
             page: 1
         }
 
-        /*$scope.venda = {
-         dataVenda: '',
-         valorTotal: null
-         };*/
         $scope.searchTextCliente = null;
         $scope.clientes = [];
 
@@ -411,8 +407,6 @@ app.controller('VendaCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log', '
 
             return deferred.promise;
         };
-
-
 
         $scope.salvarVenda = function () {
             vendaService.salvarVenda($scope.venda, {

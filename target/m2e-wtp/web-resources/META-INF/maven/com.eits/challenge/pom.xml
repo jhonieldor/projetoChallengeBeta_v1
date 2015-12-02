@@ -26,7 +26,7 @@
 		<eits-webjars.version>1.0.3-SNAPSHOT</eits-webjars.version>
 		<moment.version>2.10.3</moment.version>
 		<textAngular.version>1.4.1</textAngular.version>
-	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -80,6 +80,13 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -98,15 +105,14 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
+				<!-- <exclusion> <groupId>javax.mail</groupId> <artifactId>mail</artifactId> 
+					</exclusion> -->
 				<exclusion>
 					<groupId>javax.jms</groupId>
 					<artifactId>jms</artifactId>
@@ -268,7 +274,7 @@
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
-				 <encoding>${project.build.sourceEncoding}</encoding>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -279,14 +285,14 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
-		 <plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-resources-plugin</artifactId>
-		  <version>2.4.3</version>
-		  <configuration>
-		   <encoding>${project.build.sourceEncoding}</encoding>
-		  </configuration>
-		 </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
