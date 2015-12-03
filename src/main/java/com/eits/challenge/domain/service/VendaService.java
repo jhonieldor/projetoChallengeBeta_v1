@@ -48,8 +48,9 @@ public class VendaService {
         atualizarProduto(produto, produtoVenda);
     }
 
-    public void atualizarProduto(Produto produto, ProdutoVenda produtoVenda) {
-        Integer saldoAtual = produto.getSaldoEstoque();
+    public void atualizarProduto(Produto p, ProdutoVenda produtoVenda) {
+        Produto produto = produtoRepository.findOne(p.getId());
+        Integer saldoAtual = produto.getSaldoEstoque();        
         produto.setSaldoEstoque(saldoAtual - produtoVenda.getQuantidade());
         produto.setProdutoVendido(true);
         produtoRepository.save(produto);

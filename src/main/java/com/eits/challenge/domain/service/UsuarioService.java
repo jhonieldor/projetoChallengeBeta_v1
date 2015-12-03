@@ -22,30 +22,30 @@ import com.eits.challenge.domain.repository.IUsuarioRepository;
 @Transactional
 @RemoteProxy(name="usuarioService")
 public class UsuarioService {
-    
+
 	@Autowired
 	private IUsuarioRepository usuarioRespository;
-	
-	
-        public void salvarUsuario(Usuario usuario){
-            if(usuario.getId()==null){
-                enviarEmail();
-            }
-            
-            usuarioRespository.save(usuario);
-        }
-	
-        public void desativarUsuario(Usuario usuario){
-            usuario.setAtivo(false);
-            usuarioRespository.save(usuario);
-        }
 
-        public void ativarUsuario(Usuario usuario){
-            usuario.setAtivo(true);
-            usuarioRespository.save(usuario);
-        }
-        
-        public void enviarEmail(){
-            
-        }
+
+	public void salvarUsuario(Usuario usuario){
+		if(usuario.getId()==null){
+			enviarEmail();
+		}
+
+		usuarioRespository.save(usuario);
+	}
+
+	public void desativarUsuario(Usuario usuario){
+		usuario.setAtivo(false);
+		usuarioRespository.save(usuario);
+	}
+
+	public void ativarUsuario(Usuario usuario){
+		usuario.setAtivo(true);
+		usuarioRespository.save(usuario);
+	}
+
+	public void enviarEmail(){
+
+	}
 }
