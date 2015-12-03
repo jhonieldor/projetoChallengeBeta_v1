@@ -1,0 +1,80 @@
+<md-dialog aria-label="Usuário">
+    <div layout="column" ng-cloak>
+        <md-card>
+            <center>
+                <h2> Usuário </h2>
+            </center>
+            <md-dialog-content layout-padding style="width: 300px">
+
+                <form name="usuarioForm" novalidate="true" >
+                    <!-- <input name="Nome" -->
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 100%;">  
+                            <label> Login </label>
+                            <input type="text"  ng-model="entidade.login" name="login" required maxlength=200>
+                            <div ng-show="frm.$submitted || frm.login.$touched" ng-messages="usuarioForm.login.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 100%;">  
+                            <label> Senha </label>
+                            <input type="password"  ng-model="entidade.senha" name="login" required maxlength=200>
+                            <div ng-show="frm.$submitted || frm.login.$touched" ng-messages="usuarioForm.login.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 100%;">  
+                            <label> Email </label>
+                            <input type="text" ng-model="entidade.email" name="email" required maxlength=200>
+                            <div ng-show="frm.$submitted || frm.email.$touched" ng-messages="usuarioForm.email.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>        
+
+                    <div layout layout-sm="column">  
+                        <md-input-container style="width: 100%;">  
+                            <label> Tipo de Perfil </label>
+                            <md-select ng-model="entidade.perfil">
+                                <md-option >
+                                   Administrador
+                                </md-option>
+                                
+                                 <md-option >
+                                   Usuário
+                                </md-option>
+                                
+                            </md-select>
+                        </md-input-container>
+                    </div>    
+
+                    <div class="md-actions" layout="row">
+                        <md-button ng-click="cancelar()">
+                            Cancelar
+                        </md-button>
+                        <md-button ng-click="salvar()"  class="md-primary">
+                            Salvar
+                        </md-button>
+                    </div>      
+
+
+                </form>
+
+
+            </md-dialog-content>
+        </md-card>   
+    </div>    
+
+</md-dialog>

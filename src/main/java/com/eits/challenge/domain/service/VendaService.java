@@ -55,6 +55,7 @@ public class VendaService {
         produto.setProdutoVendido(true);
         produtoRepository.save(produto);
     }
+    
 
     public void lancarVenda(Venda venda, Usuario usuario, Cliente cliente) {
         venda.setCliente(cliente);
@@ -103,7 +104,7 @@ public class VendaService {
         List<ProdutoVenda> produtosVenda = produtoVendaRepository.findByVenda(venda);
 
         for (ProdutoVenda produtoVenda : produtosVenda) {
-            Produto produto = produtoVenda.getProduto();
+            Produto produto = produtoRepository.findOne(produtoVenda.getId());
             produto.setSaldoEstoque(produto.getSaldoEstoque() + produtoVenda.getQuantidade());
             produtoRepository.save(produto);
         }

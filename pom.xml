@@ -10,7 +10,7 @@
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.2.2.RELEASE</org.springframework-version>
-		<org.springsecurity-version>3.2.5.RELEASE</org.springsecurity-version>
+		<org.springsecurity-version>4.0.3.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 
@@ -29,6 +29,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -68,6 +75,25 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springsecurity-version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>br.com.eits</groupId>
 			<artifactId>eits-java-common</artifactId>
 			<version>${eits-java-common.version}</version>
@@ -80,11 +106,6 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
 
 
 		<!-- Logging -->
@@ -111,8 +132,10 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<exclusions>
-				<!-- <exclusion> <groupId>javax.mail</groupId> <artifactId>mail</artifactId> 
-					</exclusion> -->
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>javax.jms</groupId>
 					<artifactId>jms</artifactId>

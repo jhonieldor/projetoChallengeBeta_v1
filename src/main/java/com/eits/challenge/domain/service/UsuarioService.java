@@ -5,12 +5,15 @@
  */
 package com.eits.challenge.domain.service;
 
+import java.util.List;
+
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.eits.challenge.domain.entity.Usuario;
+import com.eits.challenge.domain.mail.MailSender;
 import com.eits.challenge.domain.repository.IUsuarioRepository;
 
 /**
@@ -28,11 +31,18 @@ public class UsuarioService {
 
 
 	public void salvarUsuario(Usuario usuario){
+
+		Boolean enviarEmail = false;
 		if(usuario.getId()==null){
-			enviarEmail();
+			enviarEmail = true;
 		}
 
 		usuarioRespository.save(usuario);
+
+		if(enviarEmail){
+			Thread emailThread = new Thread(new MailSender(usuario.getEmail()));
+			emailThread.start();
+		}
 	}
 
 	public void desativarUsuario(Usuario usuario){
@@ -45,7 +55,8 @@ public class UsuarioService {
 		usuarioRespository.save(usuario);
 	}
 
-	public void enviarEmail(){
-
+	@Transactional(readOnly=true)
+	public List<Usuario> listarUsuarios(){
+		return usuarioRespository.findAll();
 	}
 }
