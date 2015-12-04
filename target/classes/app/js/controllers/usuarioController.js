@@ -10,10 +10,26 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
 
         $scope.usuarios = [];
         $scope.usuariosDesativar = [];
-        
+
         $scope.perfis = ('Administrador', 'Usuario');
         $scope.tipoPerfil = null;
-        
+
+
+
+        $scope.carregarLista = function () {
+            usuarioService.listarUsuarios({
+                callback: function (result) {
+                    $scope.usuarios = result;
+                    $scope.$apply();
+                }, errorHandler: function (a, b) {
+                    console.log(a);
+                }
+            });
+        };
+
+        $scope.carregarLista();
+
+
         $scope.findByIdInArray = function (array, entity) {
             for (var i = 0; i < array.length; i++) {
                 if (array[i].id == entity.id) {
@@ -37,6 +53,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
             }, 1200);
             return deferred.promise;
         };
+
         $scope.dialogNovoUsuario = function (ev) {
             $mdDialog.show({
                 controller: usuarioDialogController,
@@ -51,7 +68,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     .then(function (result) {
                         $scope.carregarLista();
                         $mdToast.cancel();
-                        var toast = $mdToast.simple().content('Inclusão do produto realizada com sucesso!')
+                        var toast = $mdToast.simple().content('InclusÃ£o do produto realizada com sucesso!')
                                 .action('Fechar')
                                 .highlightAction(false)
                                 .position('bottom left right');
@@ -93,9 +110,9 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
 
         $scope.dialogDesativarUsuario = function (ev, usuario) {
             var confirm = $mdDialog.confirm()
-                    .title('Desativação de Usuário')
-                    .content('Deseja realmente desativar o usuário selecionado?')
-                    .ariaLabel('Desativação do Usuário')
+                    .title('DesativaÃ§Ã£o de UsuÃ¡rio')
+                    .content('Deseja realmente desativar o usuÃ¡rio selecionado?')
+                    .ariaLabel('DesativaÃ§Ã£o do UsuÃ¡rio')
                     .ok('Sim')
                     .cancel('Cancelar')
                     .targetEvent(ev);
@@ -104,7 +121,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     callback: function (result) {
                         $mdToast.cacel();
                         var toast = $mdToast.simple()
-                                .content('Desativação do usuário realizada com sucesso!')
+                                .content('DesativaÃ§Ã£o do usuÃ¡rio realizada com sucesso!')
                                 .action('Fechar')
                                 .highlightAction(false)
                                 .position('bottom left right');
@@ -114,7 +131,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     },
                     errorHandler: function (message, exception) {
                         $mdToast.showSimple(message);
-                        $log.error("Erro ocorrido na desativação do usuário", message);
+                        $log.error("Erro ocorrido na desativaÃ§Ã£o do usuÃ¡rio", message);
                     }
                 })
             }, function () {
@@ -124,7 +141,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
         $scope.usuarioClicked = function (ev, usuario) {
             $scope.dialogAlterarUsuario(ev, usuario);
         };
-        
+
         function usuarioDialogController($scope, $mdDialog, $mdToast, entidadeExterna) {
             if (entidadeExterna != null) {
                 $scope.entidade = entidadeExterna;

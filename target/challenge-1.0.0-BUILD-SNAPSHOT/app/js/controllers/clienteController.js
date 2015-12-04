@@ -16,6 +16,7 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
         $scope.clientes = [];
         $scope.clientesExcluir = [];
         $scope.totalVendasClientes = 0;
+        
 
         $scope.carregarLista = function () {
             clienteService.listarClientes({

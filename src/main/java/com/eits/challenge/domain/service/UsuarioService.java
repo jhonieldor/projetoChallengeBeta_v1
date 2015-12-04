@@ -31,7 +31,8 @@ public class UsuarioService {
 
 
 	public void salvarUsuario(Usuario usuario){
-
+                usuario.setAtivo(true);
+                usuario.setPerfil(usuario.getPerfil().trim());
 		Boolean enviarEmail = false;
 		if(usuario.getId()==null){
 			enviarEmail = true;
@@ -40,10 +41,17 @@ public class UsuarioService {
 		usuarioRespository.save(usuario);
 
 		if(enviarEmail){
-			Thread emailThread = new Thread(new MailSender(usuario.getEmail()));
+			String assunto = "Sistema de Controle de Vendas";
+			String mensagem = "Bem vindo ao Sistema de Controle de Vendas \n\n "
+					+ "Segue baixo os dados para acesso ao sistema: " 
+					+ "\n\nLogin: " + usuario.getLogin()
+					+ "\nSenha: " + usuario.getSenha();
+			
+			Thread emailThread = new Thread(new MailSender(usuario.getEmail(), mensagem, assunto));
 			emailThread.start();
 		}
 	}
+        
 
 	public void desativarUsuario(Usuario usuario){
 		usuario.setAtivo(false);

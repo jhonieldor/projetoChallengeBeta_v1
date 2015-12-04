@@ -50,10 +50,11 @@
                     <md-button href="#/vendas">
                         Vendas
                     </md-button>
-                    
-                    <md-button href="#/usuarios">
-                        Usuários
-                    </md-button>
+                    <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+                        <md-button href="#/usuarios">
+                            Usuários
+                        </md-button>
+                    </sec:authorize>
 
                 </md-content>
             </div>

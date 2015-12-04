@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-disabled="venda.estornada" md-auto-select ng-repeat="venda in vendas| orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                            <tr ng-disabled="venda.estornada" md-auto-select ng-repeat="venda in vendas | orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                                   query.limit" >
 
                                 <td>{{venda.cliente.nome}}</td>

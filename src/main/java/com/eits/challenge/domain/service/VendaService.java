@@ -104,7 +104,7 @@ public class VendaService {
         List<ProdutoVenda> produtosVenda = produtoVendaRepository.findByVenda(venda);
 
         for (ProdutoVenda produtoVenda : produtosVenda) {
-            Produto produto = produtoRepository.findOne(produtoVenda.getId());
+            Produto produto = produtoRepository.findOne(produtoVenda.getProduto().getId());
             produto.setSaldoEstoque(produto.getSaldoEstoque() + produtoVenda.getQuantidade());
             produtoRepository.save(produto);
         }
@@ -132,7 +132,8 @@ public class VendaService {
     }
 
     public List<Venda> carregarVendas() {
-        return vendaRepository.findAll();
+    	  return vendaRepository.findOrderByDataDesc();	
+//        return vendaRepository.findAll();
     }
 
     public List<Cliente> buscarClientes() {

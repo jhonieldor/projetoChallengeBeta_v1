@@ -1,19 +1,27 @@
 package com.eits.challenge.domain.entity;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import br.com.eits.common.domain.entity.AbstractEntity;
 
 @Entity
+@DynamicUpdate
 @Audited
 @DataTransferObject(javascript = "Usuario")
-public class Usuario extends AbstractEntity {
+public class Usuario extends AbstractEntity implements UserDetails, Serializable {
 
     private static final long serialVersionUID = -7817611188826662873L;
 
@@ -32,8 +40,8 @@ public class Usuario extends AbstractEntity {
     @Column
     private Boolean ativo;
 
-    @NotNull
-    @Column(nullable = false)
+//    @NotNull
+    @Column
     private String perfil;
 
     public String getLogin() {
@@ -133,7 +141,50 @@ public class Usuario extends AbstractEntity {
     public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
-    
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
     
 
 }

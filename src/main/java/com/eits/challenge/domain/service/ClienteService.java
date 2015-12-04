@@ -41,6 +41,8 @@ public class ClienteService{
 		clienteRepository.delete(clientes);
 	}
 	
+	
+	
 	public void bloquearExclusao(Cliente cliente){
 		cliente.setExclusaoBloqueada(true);
 	}
