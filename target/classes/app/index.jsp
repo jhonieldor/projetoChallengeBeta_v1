@@ -31,7 +31,18 @@
                        class="md-icon-button"> <md-icon aria-label="Menu"
                                              md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
             </md-button>
+            
+            
+         
+            
             Controle de Vendas
+            
+<!--             <md-button href="j_spring_security_logout">Logout </md-button> -->
+            
+            
+            
+<%-- 			<c:url value="/j_spring_security_logout" var="logoutUrl" /> <a href="${logoutUrl}">Log Out</a> --%>
+            
         </div>
     </md-toolbar>
     <div layout="row" flex>

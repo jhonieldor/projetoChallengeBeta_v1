@@ -9,7 +9,8 @@
 
 
 	<security:http pattern="/dwr/**" security="none" />
-
+	<security:http pattern="/webjars/**" security="none" />
+	
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/login.jsp" access="permitAll"/> 
 		
@@ -22,16 +23,18 @@
 			
 			
 		
-<!-- 	<security:form-login login-page="/app/login.jsp" -->
-<!-- 							 login-processing-url="/j_spring_security_check"	 -->
-<!--                              authentication-success-handler-ref="" -->
-<!--                              default-target-url="/app/index.jsp" -->
-<!--                              always-use-default-target="true" -->
-<!--                              authentication-failure-handler-ref="authenticationFailureHandler" -->
-<!--                              password-parameter="password" username-parameter="login"/>	 -->
+	<security:form-login login-page="/app/login.jsp"
+							 login-processing-url="/j_spring_security_check"	
+                             authentication-success-handler-ref=""
+                             always-use-default-target="true"
+                             authentication-failure-handler-ref="authenticationFailureHandler"
+                             password-parameter="j_password" username-parameter="j_username"/>	
+      
+      <security:logout  logout-url="/j_spring_security_logout" logout-success-url="/app/login.jsp"/>                       
 
 	</security:http>
-
+	
+	
 
 
 
