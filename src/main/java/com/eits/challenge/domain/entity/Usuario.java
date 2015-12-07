@@ -21,7 +21,7 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 @DynamicUpdate
 @Audited
 @DataTransferObject(javascript = "Usuario")
-public class Usuario extends AbstractEntity implements UserDetails, Serializable {
+public class Usuario extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = -7817611188826662873L;
 
@@ -40,11 +40,24 @@ public class Usuario extends AbstractEntity implements UserDetails, Serializable
     @Column
     private Boolean ativo;
 
-//    @NotNull
+    @NotNull
     @Column
     private String perfil;
+    
+    @NotNull
+    @Column
+    private String role;
+    
+    
+    public String getRole() {
+		return role;
+	}
 
-    public String getLogin() {
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getLogin() {
         return login;
     }
 
@@ -79,6 +92,9 @@ public class Usuario extends AbstractEntity implements UserDetails, Serializable
     public String getPerfil() {
         return perfil;
     }
+    
+    
+    
 
     @Override
     public int hashCode() {
@@ -142,47 +158,7 @@ public class Usuario extends AbstractEntity implements UserDetails, Serializable
         this.perfil = perfil;
     }
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	
     

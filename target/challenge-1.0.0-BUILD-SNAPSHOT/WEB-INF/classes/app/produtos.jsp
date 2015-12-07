@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 
     <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button ng-click="dialogNovoProduto($event)">Novo Produto</md-button>
+            <md-button class="md-raised" ng-click="dialogNovoProduto($event)">Novo Produto</md-button>
 
         </section>
 
@@ -34,16 +35,17 @@
                                 <th order-by="descricao" name="Descrição"></th>
                                 <th order-by="marca" name="Marca"></th>
                                 <th order-by="valor" name="Valor"></th>
+                                 <th order-by="saldo" name="Saldo de Estoque"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="produto in produtos track by $index| orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                            <tr md-disable-select="produto.produtoVendido" ng-repeat="produto in produtos track by $index| orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                                   query.limit" ng-click="produtoClicked($event, produto)">
 
                                 <td>{{produto.descricao}}</td>
                                 <td>{{produto.marca}}</td>
-                                <td>{{produto.valorUnitario}}</td>
-
+                                <td>{{produto.valorUnitario | currency : ' R$ ' }}</td>
+                                <td>{{produto.saldoEstoque}}</td>
                             </tr>
 
                         </tbody>

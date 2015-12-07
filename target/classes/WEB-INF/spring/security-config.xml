@@ -11,20 +11,24 @@
 	<security:http pattern="/dwr/**" security="none" />
 
 	<security:http auto-config="true" use-expressions="true">
-
-		<!-- <security:intercept-url pattern="/" access="permitAll" /> -->
-
-		<!-- <security:intercept-url pattern="/login/" -->
-		<!-- access="permitAll" /> -->
-
-		<!-- <security:intercept-url pattern="/index.jsp" -->
-		<!-- access="hasRole('ROLE_USER')" /> -->
+		<security:intercept-url pattern="/login.jsp" access="permitAll"/> 
+		
 
 		<security:intercept-url pattern="/"
 			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
 			
 		<security:intercept-url pattern="/usuarios.jsp"
 			access="hasRole('ROLE_ADMIN')" />	
+			
+			
+		
+<!-- 	<security:form-login login-page="/app/login.jsp" -->
+<!-- 							 login-processing-url="/j_spring_security_check"	 -->
+<!--                              authentication-success-handler-ref="" -->
+<!--                              default-target-url="/app/index.jsp" -->
+<!--                              always-use-default-target="true" -->
+<!--                              authentication-failure-handler-ref="authenticationFailureHandler" -->
+<!--                              password-parameter="password" username-parameter="login"/>	 -->
 
 	</security:http>
 
@@ -33,14 +37,14 @@
 
 
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="Admin" password="admin"
-					authorities="ROLE_ADMIN" />
+		<security:authentication-provider user-service-ref="usuarioService">
+<!-- 			<security:user-service> -->
+<!-- 				<security:user name="Admin" password="admin" -->
+<!-- 					authorities="ROLE_ADMIN" /> -->
 
-				<security:user name="User" password="user"
-					authorities="ROLE_USER" />
-			</security:user-service>
+<!-- 				<security:user name="User" password="user" -->
+<!-- 					authorities="ROLE_USER" /> -->
+<!-- 			</security:user-service> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -51,6 +55,6 @@
 	<!-- </security:http> -->
 
 
-
+	 <bean id="authenticationFailureHandler" class="com.eits.challenge.domain.service.AuthenticationFailureHandler"/>
 
 </beans>

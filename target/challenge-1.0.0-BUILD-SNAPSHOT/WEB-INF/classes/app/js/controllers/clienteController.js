@@ -15,6 +15,8 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
 
         $scope.clientes = [];
         $scope.clientesExcluir = [];
+        $scope.totalVendasClientes = 0;
+        
 
         $scope.carregarLista = function () {
             clienteService.listarClientes({
@@ -35,7 +37,14 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
             }
             return -1;
         }
-
+        
+        $scope.processarTotalVendas = function(){
+            $scope.totalVendasClientes = 0;
+            for(var i=0; i< clientes.length; i++){
+                $scope.totalVendasClientes = $scope.totalVendasClientes + clientes[i].totalVendas;
+            }
+        }
+        
 
         $scope.carregarLista();
 
@@ -142,7 +151,7 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
 
                         $scope.limparSelecao();
 
-                        for (var j = 0; j < listaCopa.length; j++) {
+                        for (var j = 0; j < listaCopia.length; j++) {
                             var i = $scope.findByIdInArray($scope.clientes, listaCopia[j]);
                             $scope.clientes.splice(i, 1);
                         }
@@ -194,6 +203,7 @@ app.controller('ClienteCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                 $scope.modoAlteracao = true;
             } else {
                 $scope.entidade = new Cliente();
+                $scope.entidade.totalVendas = 0;
                 $scope.modoAlteracao = false;
             }
 

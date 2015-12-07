@@ -64,6 +64,12 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$mdSidenav', function ($scop
                         controller: 'VendaCtrl'
 
                     })
+                    
+//                    .when('/login', {
+//                        templateUrl: './app/login.jsp',
+////                        controller: 'VendaCtrl'
+//
+//                    })
 
 
                     .otherwise({

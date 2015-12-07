@@ -32,12 +32,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="usuario in usuarios| orderBy: query.order | limitTo: query.limit: (query.page -1) *
-                                                  query.limit" ng-click="usuarioClicked($event, usuario)">
+                                                  query.limit">
 
                                 <td>{{usuario.login}}</td>
                                 <td>{{usuario.email}}</td>
                                 <td>{{usuario.perfil}}</td>
-
+                                <td> <md-button  ng-disabled="!usuario.ativo" class="md-raised" ng-click="usuarioClicked($event, usuario)"> Alterar </md-button> </td>
+                                
                                 <td>
                                     <md-button ng-show="!usuario.ativo" class="md-raised md-warn" ng-click="dialogAtivarUsuario($event, usuario)"> Ativar </md-button> 
                                     <md-button ng-show="usuario.ativo" class="alternate md-raised md-primary" ng-click="dialogDesativarUsuario($event, usuario)"> Desativar </md-button>

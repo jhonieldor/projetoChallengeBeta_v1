@@ -11,10 +11,10 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
         $scope.usuarios = [];
         $scope.usuariosDesativar = [];
 
-        $scope.perfis = ('Administrador', 'Usuario');
-        $scope.tipoPerfil = null;
-
-
+        $scope.perfis = ["Administrador", "Usuário"];
+        $scope.infoPerfil = "Tipo de Perfil";
+        
+        
 
         $scope.carregarLista = function () {
             usuarioService.listarUsuarios({
@@ -28,7 +28,6 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
         };
 
         $scope.carregarLista();
-
 
         $scope.findByIdInArray = function (array, entity) {
             for (var i = 0; i < array.length; i++) {
@@ -68,7 +67,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     .then(function (result) {
                         $scope.carregarLista();
                         $mdToast.cancel();
-                        var toast = $mdToast.simple().content('InclusÃ£o do produto realizada com sucesso!')
+                        var toast = $mdToast.simple().content('Inclusão do produto realizada com sucesso!')
                                 .action('Fechar')
                                 .highlightAction(false)
                                 .position('bottom left right');
@@ -78,6 +77,7 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     }, function () {
                     });
         }
+
 
         $scope.dialogAlterarUsuario = function (ev, entidade) {
             $mdDialog.show({
@@ -107,36 +107,115 @@ app.controller('UsuarioCtrl', ['$q', '$scope', '$rootScope', '$mdToast', '$log',
                     }, function () {
                     });
         }
+        
+        
+//        $scope.dialogExcluirCliente = function (ev, lista) {
+//            var confirm = $mdDialog.confirm()
+//                    .title('Exclusão de Cliente')
+//                    .content('Deseja realmente excluir o(s) cliente(s) selecionado(s)? Esta operação não poderá ser desfeita.')
+//                    .ariaLabel('Exclusão de Cliente')
+//                    .ok('Sim')
+//                    .cancel('Cancelar')
+//                    .targetEvent(ev);
+//            var listaCopia = angular.copy(lista);
+//
+//            $mdDialog.show(confirm).then(function () {
+//                clienteService.remover(lista, {
+//                    callback: function (result) {
+//                        $scope.carregarLista();
+//                        $mdToast.cancel();
+//                        var toast = $mdToast.simple()
+//                                .content('Registro(s) excluído(s) com sucesso!')
+//                                .action('Fechar')
+//                                .highlightAction(false)
+//                                .position('bottom left right');
+//                        $mdToast.show(toast).then(function () {
+//                        });
+//
+//                        $scope.limparSelecao();
+//
+//                        for (var j = 0; j < listaCopia.length; j++) {
+//                            var i = $scope.findByIdInArray($scope.clientes, listaCopia[j]);
+//                            $scope.clientes.splice(i, 1);
+//                        }
+//                        $scope.$apply();
+//                    },
+//                    errorHandler: function (message, exception) {
+//                        $mdToast.showSimple(message);
+//                        $log.error("Erro ao excluir registro(s)", message);
+//                    }
+//                })
+//            }, function () {
+//            });
+//        }
+        
 
         $scope.dialogDesativarUsuario = function (ev, usuario) {
             var confirm = $mdDialog.confirm()
-                    .title('DesativaÃ§Ã£o de UsuÃ¡rio')
-                    .content('Deseja realmente desativar o usuÃ¡rio selecionado?')
-                    .ariaLabel('DesativaÃ§Ã£o do UsuÃ¡rio')
+                    .title('Desativação de Usuário')
+                    .content('Deseja realmente desativar o usuário selecionado?')
+                    .ariaLabel('Desativação do Usuário')
                     .ok('Sim')
                     .cancel('Cancelar')
                     .targetEvent(ev);
             $mdDialog.show(confirm).then(function () {
                 usuarioService.desativarUsuario(usuario, {
                     callback: function (result) {
-                        $mdToast.cacel();
+                        $scope.carregarLista();
+                        $mdToast.cancel();
                         var toast = $mdToast.simple()
-                                .content('DesativaÃ§Ã£o do usuÃ¡rio realizada com sucesso!')
+                                .content('Desativação do usuário realizada com sucesso!')
                                 .action('Fechar')
                                 .highlightAction(false)
                                 .position('bottom left right');
                         $mdToast.show(toast).then(function () {
                         });
                         $scope.apply();
+                       
                     },
                     errorHandler: function (message, exception) {
                         $mdToast.showSimple(message);
-                        $log.error("Erro ocorrido na desativaÃ§Ã£o do usuÃ¡rio", message);
+                        $log.error("Erro ocorrido na desativação do usuário", message);
                     }
                 })
             }, function () {
             });
         }
+
+        $scope.dialogAtivarUsuario = function (ev, usuario) {
+            var confirm = $mdDialog.confirm()
+                    .title('Ativação de Usuário')
+                    .content('Deseja realmente ativar o usuário selecionado? Esta ação permitirá que o mesmo volte a ter acesso ao sistema.')
+                    .ariaLabel('Ativação do Usuário')
+                    .ok('Sim')
+                    .cancel('Cancelar')
+                    .targetEvent(ev);
+            $mdDialog.show(confirm).then(function () {
+                usuarioService.ativarUsuario(usuario, {
+                    callback: function (result) {
+                        $scope.carregarLista();
+                        $mdToast.cancel();
+                        var toast = $mdToast.simple()
+                                .content('Ativação do usuário realizada com sucesso!')
+                                .action('Fechar')
+                                .highlightAction(false)
+                                .position('bottom left right');
+                        $mdToast.show(toast).then(function () {
+                        });
+                         $scope.apply();
+                    },
+                    errorHandler: function (message, exception) {
+                        $mdToast.showSimple(message);
+                        $log.error("Erro ocorrido na desativação do usuário", message);
+                    }
+                })
+
+
+            }, function () {
+            });
+        }
+
+
 
         $scope.usuarioClicked = function (ev, usuario) {
             $scope.dialogAlterarUsuario(ev, usuario);

@@ -1,26 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" lang="pt">
 <div>  
         <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
-            <md-button ng-click="dialogNovoCliente($event)">Novo Cliente</md-button>
-            
-            <!--<md-button class="md-fab md-accent md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopup($event)">
-                <i class="md-icon md-icon-add md-icon-lg"></i>
-            </md-button>-->
-            
-            
-            
+            <md-button class="md-raised" ng-click="dialogNovoCliente($event)">Novo Cliente</md-button>
         </section>
 
 </div>    
 
 <div>
-<md-content >
+<md-content>
     <md-card>
         <md-data-table-toolbar ng-show="!selected.length">
           <h2 class="md-title">Cadastro de Clientes</h2>
@@ -47,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  ng-repeat="cliente in clientes | orderBy: query.order | limitTo: query.limit: (query.page -1) *
+                    <tr md-disable-select="cliente.exclusaoBloqueada" ng-repeat="cliente in clientes | orderBy: query.order | limitTo: query.limit: (query.page -1) *
                                                   query.limit" ng-click="clienteClicked($event, cliente)">
                     
                         <td>{{cliente.nome}}</td>
@@ -61,9 +55,11 @@
             </table>
         </md-data-table-container>
         
-        <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{clientes.count}}" md-trigger="onpagechange"></md-data-table-pagination>
+        <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{clientes.length}}" md-trigger="onpagechange"></md-data-table-pagination>
         
     </md-card>
+    
+   
     
         
 </md-content>
